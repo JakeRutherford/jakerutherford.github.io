@@ -3,106 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>Innovative AI Engineer & Data Scientist Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --text-color: #ecf0f1;
+            --bg-color: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
-            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skill-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .experience-timeline {
+            position: relative;
             max-width: 800px;
             margin: 0 auto;
+        }
+
+        .timeline-item {
             padding: 20px;
-        }
-        h1, h2 {
-            color: #2c3e50;
-        }
-        h1 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        h2 {
-            margin-top: 30px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        .section {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             margin-bottom: 30px;
+            opacity: 0;
+            transform: translateX(-50px);
         }
-        .job-title {
+
+        .timeline-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--secondary-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 5px;
             font-weight: bold;
+            transition: background-color 0.3s ease;
         }
-        .job-period {
-            font-style: italic;
-            color: #7f8c8d;
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background-color: rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to My Portfolio</h1>
+        <div class="container">
+            <h1>Innovative AI Engineer & Data Scientist</h1>
+            <p class="tagline">Transforming Industries with Cutting-Edge AI Solutions</p>
+        </div>
     </header>
 
-    <section class="section" id="about">
-        <h2>About Me</h2>
-        <p>I'm a passionate and experienced Data Scientist and Research Engineer with a strong background in AI, machine learning, and cloud computing. My journey in the tech world has led me through various exciting roles, from contributing to government digital services to pioneering AI research in the legal sector.</p>
-    </section>
-
-    <section class="section" id="skills">
-        <h2>Skills</h2>
-        <p>My technical toolkit includes:</p>
-        <ul>
-            <li><strong>Programming:</strong> Python, PyTorch, HuggingFace</li>
-            <li><strong>Data Science:</strong> Scikit-learn, Pandas, Numpy</li>
-            <li><strong>Cloud & DevOps:</strong> AWS, Docker, GitHub Actions, CI/CD</li>
-            <li><strong>Machine Learning:</strong> LLMs, Embeddings, RAG, GraphRAG</li>
-            <li><strong>Specialties:</strong> Machine Learning Pipelines, Model Deployment, Data Versioning</li>
-        </ul>
-    </section>
-
-    <section class="section" id="experience">
-        <h2>Professional Experience</h2>
-        
-        <div class="job">
-            <p class="job-title">Senior Research Engineer at vLex</p>
-            <p class="job-period">May 2024 - Present</p>
-            <p>As the founding member of vLex's Legal AI R&D team, I'm at the forefront of integrating cutting-edge AI technologies into legal solutions. My work involves advanced techniques in embeddings, LLM evaluation, and innovative applications like GraphRAG and AI-assisted contract review.</p>
-        </div>
-
-        <div class="job">
-            <p class="job-title">Researcher at University of Oxford</p>
-            <p class="job-period">September 2023 - Present</p>
-            <p>I lead the development of an advanced chatbot for climate litigation research, utilizing state-of-the-art language models and retrieval augmented generation techniques.</p>
-        </div>
-
-        <div class="job">
-            <p class="job-title">Data Scientist at MDRx</p>
-            <p class="job-period">May 2022 - May 2024</p>
-            <p>At MDRx, I played a key role in revolutionizing music rights management through data science and machine learning. My contributions ranged from building knowledge graphs to implementing advanced record linkage systems and automating artist contribution verification.</p>
-        </div>
-
-        <div class="job">
-            <p class="job-title">Data Scientist at Government Digital Service</p>
-            <p class="job-period">August 2021 - May 2022</p>
-            <p>I applied various machine learning techniques to enhance content discovery and user experience on GOV.UK, including link prediction, sentiment analysis, and knowledge graph enrichment.</p>
+    <section id="skills">
+        <div class="container">
+            <h2>Expertise</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <h3>AI & ML</h3>
+                    <p>LLMs, RAG, GraphRAG</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Data Science</h3>
+                    <p>Python, PyTorch, Scikit-learn</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Cloud & DevOps</h3>
+                    <p>AWS, Docker, CI/CD</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Specialties</h3>
+                    <p>ML Pipelines, Model Deployment</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="section" id="education">
-        <h2>Education</h2>
-        <ul>
-            <li><strong>MSc in Business Analytics</strong> (Distinction) - University College London (UCL), UK</li>
-            <li><strong>BSc in Data Science</strong> (First Class, top 1%) - University of Nottingham, UK</li>
-        </ul>
+    <section id="experience">
+        <div class="container">
+            <h2>Groundbreaking Projects</h2>
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <h3>Pioneering Legal AI Research</h3>
+                    <p>Revolutionizing legal tech with advanced AI solutions at vLex</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Climate Litigation Chatbot</h3>
+                    <p>Developing cutting-edge NLP solutions for environmental research at Oxford</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Music Rights Revolution</h3>
+                    <p>Transforming artist compensation with AI-driven solutions at MDRx</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Government Digital Transformation</h3>
+                    <p>Enhancing public services through advanced ML techniques</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="section" id="mentorship">
-        <h2>Mentorship</h2>
-        <p>I'm committed to giving back to the tech community. Since January 2021, I've been serving as a Postgraduate Dissertation Supervisor at UCL, guiding the next generation of data scientists and researchers.</p>
+    <section id="cta">
+        <div class="container" style="text-align: center;">
+            <h2>Ready to Innovate Together?</h2>
+            <a href="#" class="cta-button">Let's Connect</a>
+        </div>
     </section>
 
     <footer>
-        <p>I'm always eager to collaborate on exciting projects or discuss innovations in AI and data science. Feel free to reach out!</p>
+        <div class="container">
+            <p>Driving the future of AI and Data Science. Let's create something extraordinary.</p>
+        </div>
     </footer>
+
+    <script>
+        gsap.from("header h1", {opacity: 0, y: 50, duration: 1, ease: "power3.out"});
+        gsap.from(".tagline", {opacity: 0, y: 50, duration: 1, delay: 0.5, ease: "power3.out"});
+        
+        gsap.from(".skill-card", {
+            scrollTrigger: {
+                trigger: "#skills",
+                start: "top 80%"
+            },
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: "power3.out"
+        });
+
+        gsap.from(".timeline-item", {
+            scrollTrigger: {
+                trigger: "#experience",
+                start: "top 80%"
+            },
+            opacity: 0,
+            x: -50,
+            stagger: 0.3,
+            duration: 0.8,
+            ease: "power3.out"
+        });
+
+        gsap.from(".cta-button", {
+            scrollTrigger: {
+                trigger: "#cta",
+                start: "top 80%"
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: "power3.out"
+        });
+    </script>
 </body>
 </html>
