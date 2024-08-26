@@ -72,8 +72,9 @@
                 <a href="#contact" class="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300">Let's talk</a>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <div class="portrait-container">
-                    <img src="portrait-removebg.png" alt="Jake Rutherford" class="portrait">
+                <div class="relative w-[500px] h-[500px] rounded-full overflow-hidden">
+                    <img src="portrait-removebg.png" alt="Jake Rutherford" class="w-full h-full object-cover filter grayscale hover:filter-none transition-all duration-300">
+                    <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-gray-900 to-transparent pointer-events-none"></div>
                 </div>
             </div>
         </div>
@@ -254,8 +255,9 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="mt-6">
-                                <img src="vlex-logo.png" alt="vLex Logo" class="h-20 w-auto">
+                            <div class="mt-6 flex items-center">
+                                <img src="vlex-logo.png" alt="vLex Logo" class="h-20 w-auto mr-2">
+                                <span class="text-sm text-gray-400">Your ultimate legal platform.</span>
                             </div>
                         </div>
                         
