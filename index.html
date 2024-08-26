@@ -1,577 +1,294 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jake Rutherford - Professional Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+    <title>Jake Rutherford - Research Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-
-        :root {
-            --primary-color: #841C26;
-            --secondary-color: #a5a3c5;
-            --bg-color: #101A1F;
-            --text-color: #e5e7eb;
-            --card-bg: #13262F;
-            --hover-color: #5c131a;
-            --button-text: var(--text-color);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        nav {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style-type: none;
-        }
-
-        nav ul li {
-            margin: 0 1.5rem;
-        }
-
-        nav ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--secondary-color);
-        }
-
-        header {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 0;
+        .portrait-container {
             position: relative;
+            width: 500px;
+            height: 500px;
             overflow: hidden;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 50%;
         }
-
-        #vanta-animation {
-            position: absolute;
+        .portrait {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+        .portrait:hover {
+            filter: grayscale(0%);
+        }
+        #particles-canvas {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
-        }
-
-        header::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to bottom, rgba(17, 24, 39, 0), var(--bg-color));
-            z-index: 2;
-        }
-
-        header .container {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: var(--text-color);
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: var(--text-color);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .about-card {
-            background-color: var(--card-bg);
-            border-radius: 0.5rem;
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-        }
-
-        .about-card i {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .about-card h3 {
-            color: var(--text-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .about-card p, .about-card ul {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            text-align: left;
-        }
-
-        .about-card ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .about-card ul li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .about-card ul li::before {
-            content: "\f00c";
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-        }
-
-        .about-footer {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .about-footer p {
-            font-size: 1rem;
-            color: var(--secondary-color);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            background-color: var(--card-bg);
-            border-radius: 0.5rem;
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(45deg);
-            transition: transform 0.5s ease;
-        }
-
-        .skill-card:hover::before {
-            transform: rotate(45deg) translate(50%, 50%);
-        }
-
-        .skill-card i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .skill-card h3 {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .skill-card p {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: var(--primary-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -17px;
-            background-color: var(--bg-color);
-            border: 4px solid var(--primary-color);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .left {
-            left: 0;
-        }
-
-        .right {
-            left: 50%;
-        }
-
-        .left::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            right: 30px;
-            border: medium solid var(--card-bg);
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent var(--card-bg);
-        }
-
-        .right::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            left: 30px;
-            border: medium solid var(--card-bg);
-            border-width: 10px 10px 10px 0;
-            border-color: transparent var(--card-bg) transparent transparent;
-        }
-
-        .right::after {
-            left: -16px;
-        }
-
-        .timeline-content {
-            padding: 20px 30px;
-            background-color: var(--card-bg);
-            position: relative;
-            border-radius: 6px;
-        }
-
-        .timeline-content h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-        }
-
-        .timeline-content h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content p {
-            font-size: 0.9rem;
-        }
-
-        .timeline-content .date {
-            position: absolute;
-            top: -25px;
-            right: 20px;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            padding: 2px 10px;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
-
-        @media screen and (max-width: 600px) {
-            .timeline::after {
-                left: 31px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-
-            .timeline-item::before {
-                left: 60px;
-                border: medium solid var(--card-bg);
-                border-width: 10px 10px 10px 0;
-                border-color: transparent var(--card-bg) transparent transparent;
-            }
-
-            .left::after, .right::after {
-                left: 15px;
-            }
-
-            .right {
-                left: 0%;
-            }
-
-            .timeline-content .date {
-                position: relative;
-                top: 0;
-                right: auto;
-                display: inline-block;
-                margin-bottom: 10px;
-            }
+            z-index: -1;
+            pointer-events: none;
         }
     </style>
 </head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#work">My Work</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+
+<body class="bg-gray-900 text-white font-mono">
+    <canvas id="particles-canvas"></canvas>
+    <div class="fixed inset-0 z-[-2]">
+        <div class="relative h-full w-full bg-slate-950">
+            <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+        </div>
+    </div>
+    <nav class="p-6">
+        <div class="max-w-6xl mx-auto flex justify-end items-center">
+            <div class="space-x-6">
+            <a href="#work" class="hover:text-gray-300">Work</a>
+            <a href="#about" class="hover:text-gray-300">About</a>
+            <a href="#contact" class="hover:text-gray-300">Contact</a>
+            </div>
+        </div>
     </nav>
 
-    <header>
-        <div id="vanta-animation"></div>
-        <div class="container">
-            <h1>Jake Rutherford</h1>
-            <p class="tagline">Senior Research Engineer</p>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/jake-rutherford/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/JakeRutherford/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                <a href="mailto:jakerutherford@outlook.com"><i class="fas fa-envelope"></i></a>
+    <header class="py-20 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-6xl font-bold mb-4">Jake Rutherford</h1>
+                <p class="text-xl text-gray-400 mb-8">A Senior Researcher at vLex and the University of Oxford.</p>
+                <div class="flex space-x-4 mb-8">
+                    <a href="https://linkedin.com/in/jake-rutherford/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors">
+                        <i class="fab fa-linkedin fa-2x"></i>
+                    </a>
+                    <a href="https://github.com/JakeRutherford/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
+                    <a href="mailto:jakerutherford@outlook.com" class="text-white hover:text-gray-300 transition-colors">
+                        <i class="fas fa-envelope fa-2x"></i>
+                    </a>
+                </div>
+                <a href="#contact" class="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300">Let's talk</a>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="portrait-container">
+                    <img src="portrait-removebg.png" alt="Jake Rutherford" class="portrait">
+                </div>
             </div>
         </div>
     </header>
+    
 
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-grid">
-                <div class="about-card">
-                    <i class="fas fa-user-tie"></i>
-                    <h3>Professional Profile</h3>
-                    <p>Senior Research Engineer with a focus on solving complex problems in natural language processing and network science.</p>
-                </div>
-                <div class="about-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Current Interests</h3>
-                    <ul>
-                        <li>AI integration in specialised domains (e.g., legal tech, climate research)</li>
-                        <li>Optimisation of machine learning workflows</li>
-                        <li>Innovative applications of language models and knowledge graphs</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="about-footer">
-                <p>I'm open to collaboration on challenging projects that push the boundaries of AI and machine learning. If you have a project that aligns with these areas, I welcome the opportunity to discuss how we might work together.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
-            <h2>Core Competencies</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fas fa-brain"></i>
-                    <h3>Machine Learning</h3>
-                    <p>LLMs, RAG, GraphRAG, PyTorch</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-cloud"></i>
-                    <h3>Cloud & MLOps</h3>
-                    <p>AWS, Docker, GitHub Actions, CI/CD</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-network-wired"></i>
-                    <h3>Network Science</h3>
-                    <p>Graph Analysis, Community Detection</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Programming</h3>
-                    <p>Python, JavaScript, SQL</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="work">
-        <div class="container">
-            <h2>Professional Journey</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <span class="date">2024 - Present</span>
-                        <h3>vLex</h3>
-                        <h4>Senior Research Engineer</h4>
-                        <p>Senior Research Engineer within vLex Labs, leveraging NLP and network science to improve legal workflows and legal research.</p>
+    <main class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <section id="about" class="mb-20">
+                <h2 class="text-3xl font-bold mb-12 text-center">About Me</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <i class="fas fa-user-tie text-4xl text-white mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Professional Profile</h3>
+                        <p class="text-gray-400">Senior Research Engineer with a focus on solving complex problems in natural language processing and network science.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <i class="fas fa-lightbulb text-4xl text-white mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Current Interests</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <i class="fas fa-toolbox text-blue-500 mt-1 mr-3"></i>
+                                <p class="text-gray-400">Integrating AI technologies into specialised domains.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-project-diagram text-purple-500 mt-1 mr-3"></i>
+                                <p class="text-gray-400">Developing innovative applications of knowledge graphs.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-robot text-yellow-500 mt-1 mr-3"></i>
+                                <p class="text-gray-400">Foundational research in information retrieval and language modelling.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <span class="date">2023 - Present</span>
-                        <h3>University of Oxford</h3>
-                        <h4>Researcher</h4>
-                        <p>Applying RAG to climate litigation research.</p>
-                        <a href="https://clara-research.com/" class="button button-primary" style="display: inline-block; padding: 0.25rem 1.5rem; margin-top: 1em; border-radius: 0.375rem; font-weight: 600; text-decoration: none; background-color: var(--primary-color); color: var(--button-text);">Try it</a>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <span class="date">2022 - 2024</span>
-                        <h3>Mishcon de Reya</h3>
-                        <h4>Data Scientist</h4>
-                        <p>Focused on network science, record linkage, object detection and complex OCR.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <span class="date">2021 - 2022</span>
-                        <h3>Government Digital Service</h3>
-                        <h4>Data Scientist</h4>
-                        <p>Enriched the GOV.UK knowledge graph with named entity recognition and community detection.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <section id="contact">
-        <div class="container" style="text-align: center;">
-            <h2>Ready to Work Together?</h2>
-            <a href="mailto:jakerutherford@outlook.com" class="button button-primary" style="display: inline-block; padding: 0.75rem 1.5rem; border-radius: 0.375rem; font-weight: 600; text-decoration: none; background-color: var(--primary-color); color: var(--button-text);">Let's Connect</a>
+            <section id="work" class="mb-20">
+                <h2 class="text-3xl font-bold mb-12 text-center">Professional Journey</h2>
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-0 md:left-1/2 top-0 h-full w-1 bg-white md:transform md:-translate-x-1/2"></div>
+            
+                    <!-- Timeline items -->
+                    <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center w-full right-timeline">
+                        <div class="order-1 w-5/12 hidden md:block"></div>
+                        <div class="z-20 flex items-center order-1 bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 rounded-full">
+                            <i class="fas fa-balance-scale text-sm md:text-xl text-gray-900 mx-auto"></i>
+                        </div>
+                        <div class="order-1 bg-gray-800 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4 md:ml-0 ml-8">
+                            <h3 class="mb-3 font-bold text-gray-400 text-lg">vLex</h3>
+                            <h4 class="mb-3 font-bold text-white text-xl">Senior Research Engineer</h4>
+                            <h4 class="mb-3 font-bold text-gray-400 text-sm">05/2024 - Present</h4>
+                            <p class="text-sm text-gray-300 mb-3">Founding engineer of vLex's Legal AI R&D team, focusing on integrating AI technologies into legal solutions.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-brain mr-1"></i> NLP
+                                </span>
+                                <span class="bg-green-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-network-wired mr-1"></i> Legal AI
+                                </span>
+                                <span class="bg-yellow-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-project-diagram mr-1"></i> Knowledge Graphs
+                                </span>
+                                <span class="bg-orange-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-cogs mr-1"></i> MLOps
+                                </span>
+                                <span class="bg-red-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-robot mr-1"></i> RAG
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="mb-8 flex flex-col md:flex-row-reverse justify-between items-start md:items-center w-full left-timeline">
+                        <div class="order-1 w-5/12 hidden md:block"></div>
+                        <div class="z-20 flex items-center order-1 bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 rounded-full">
+                            <i class="fas fa-university text-sm md:text-xl text-gray-900 mx-auto"></i>
+                        </div>
+                        <div class="order-1 bg-gray-800 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4 md:mr-0 ml-8 md:ml-0">
+                            <h3 class="mb-3 font-bold text-gray-400 text-lg">University of Oxford</h3>
+                            <h4 class="mb-3 font-bold text-white text-xl">Researcher</h4>
+                            <h4 class="mb-3 font-bold text-gray-400 text-sm">09/2023 - Present (part-time)</h4>
+                            <p class="text-sm text-gray-300 mb-3">Leading the development of an AI-powered chatbot for climate litigation research, utilising RAG and LLMs.</p>
+                            <a href="https://clara-research.com/" class="inline-block px-4 py-2 bg-white text-gray-900 rounded-full text-sm font-semibold hover:bg-gray-200 transition-colors mb-3">
+                                <i class="fas fa-external-link-alt mr-2"></i>Try it
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-red-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-robot mr-1"></i> RAG
+                                </span>
+                                <span class="bg-teal-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-globe-americas mr-1"></i> Climate Research
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center w-full right-timeline">
+                        <div class="order-1 w-5/12 hidden md:block"></div>
+                        <div class="z-20 flex items-center order-1 bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 rounded-full">
+                            <i class="fas fa-briefcase text-sm md:text-xl text-gray-900 mx-auto"></i>
+                        </div>
+                        <div class="order-1 bg-gray-800 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4 md:ml-0 ml-8">
+                            <h3 class="mb-3 font-bold text-gray-400 text-lg">Mishcon de Reya</h3>
+                            <h4 class="mb-3 font-bold text-white text-xl">Data Scientist</h4>
+                            <h4 class="mb-3 font-bold text-gray-400 text-sm">05/2022 - 05/2024</h4>
+                            <p class="text-sm text-gray-300 mb-3">Revolutionised music rights workflows, built knowledge graphs, and implemented advanced record linkage systems. Advanced MLOps practices and collaborated on end-to-end ML applications.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-yellow-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-project-diagram mr-1"></i> Knowledge Graphs
+                                </span>
+                                <span class="bg-pink-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-link mr-1"></i> Record Linkage
+                                </span>
+                                <span class="bg-indigo-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-eye mr-1"></i> Computer Vision
+                                </span>
+                                <span class="bg-orange-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-cogs mr-1"></i> MLOps
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="mb-8 flex flex-col md:flex-row-reverse justify-between items-start md:items-center w-full left-timeline">
+                        <div class="order-1 w-5/12 hidden md:block"></div>
+                        <div class="z-20 flex items-center order-1 bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 rounded-full">
+                            <i class="fas fa-landmark text-sm md:text-xl text-gray-900 mx-auto"></i>
+                        </div>
+                        <div class="order-1 bg-gray-800 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4 md:mr-0 ml-8 md:ml-0">
+                            <h3 class="mb-3 font-bold text-gray-400 text-lg">Government Digital Service</h3>
+                            <h4 class="mb-3 font-bold text-white text-xl">Data Scientist</h4>
+                            <h4 class="mb-3 font-bold text-gray-400 text-sm">08/2021 - 05/2022</h4>
+                            <p class="text-sm text-gray-300 mb-3">Enhanced GOV.UK's content connectivity and user feedback analysis. Applied advanced NLP techniques and graph algorithms to improve digital services.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-cyan-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-sitemap mr-1"></i> Knowledge Graph
+                                </span>
+                                <span class="bg-lime-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-user-tag mr-1"></i> NER
+                                </span>
+                                <span class="bg-fuchsia-200 text-gray-700 px-2 py-1 rounded-full text-xs flex items-center">
+                                    <i class="fas fa-users mr-1"></i> Community Detection
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
+    </main>
+
+    <footer id="contact" class="py-12 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-8">Contact</h2>
+            <p class="text-gray-400 mb-4">Interested in working together? Let's connect!</p>
+            <a href="mailto:jakerutherford@outlook.com" class="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300">Get in touch</a>
+            <p class="mt-8">&copy; 2024 Jake Rutherford. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        VANTA.NET({
-            el: "#vanta-animation",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 1000.00,
-            minWidth: 1.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x000000,
-            backgroundColor: 0x13262F,
-            points: 10.00,
-            maxDistance: 20.00,
-            spacing: 7.00,
-            showDots: false,
-            effect: (p) => {
-                const headerRect = document.querySelector('header .container').getBoundingClientRect();
-                const centerX = headerRect.left + headerRect.width / 2;
-                const centerY = headerRect.top + headerRect.height / 2;
-                const radius = Math.min(headerRect.width, headerRect.height) / 2;
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
 
-                const dx = p.x - centerX;
-                const dy = p.y - centerY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-                if (distance < radius) {
-                    const angle = Math.atan2(dy, dx);
-                    p.x = centerX + Math.cos(angle) * radius;
-                    p.y = centerY + Math.sin(angle) * radius;
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 200;
+                this.size = Math.random() * 2 + 1;
+                this.speedY = Math.random() * 1 + 0.5;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                if (this.y < 0) {
+                    this.y = canvas.height + Math.random() * 200;
+                    this.x = Math.random() * canvas.width;
                 }
             }
-        })
+
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particles = [];
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (const particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
